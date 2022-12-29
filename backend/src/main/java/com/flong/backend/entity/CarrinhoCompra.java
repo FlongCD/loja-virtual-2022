@@ -11,18 +11,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
 
-@Entity
+@Entity@SequenceGenerator(name = "carrinhocompra_seq" ,initialValue = 1,  sequenceName = "carrinhocompra_seq", allocationSize = 1)
 @Table(name = "carrinho_compra")
 @Data
 public class CarrinhoCompra {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "carrinhocompra_seq")
     private Long id;
 
     @ManyToOne

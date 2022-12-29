@@ -7,18 +7,21 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
 import lombok.Data;
 
 @Entity
-@Table(name = "imagens")
+@SequenceGenerator(name = "produtosimagens_seq" ,initialValue = 1,  sequenceName = "produtosimagens_seq", allocationSize = 1)
+@Table(name = "produtoimagens")
 @Data
-public class Imagens {
+public class ProdutoImagens {
       
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produtosimagens_seq")
     private Long id;
 
     @ManyToOne
@@ -30,5 +33,8 @@ public class Imagens {
     private Date dataCriacao;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAtualizacao;
+
+    @Transient
+    private byte[] arquivo;
 
 }

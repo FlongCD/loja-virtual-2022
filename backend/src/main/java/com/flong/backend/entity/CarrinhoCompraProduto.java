@@ -9,18 +9,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 @Entity
+@SequenceGenerator(name = "carrinhocompraproduto_seq" ,initialValue = 1,  sequenceName = "carrinhocompraproduto_seq", allocationSize = 1)
 @Table(name = "carrinho_compra_produto")
 @Data
 public class CarrinhoCompraProduto {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "carrinhocompraproduto_seq")
     private Long id;
 
     @OneToMany(mappedBy = "carrinhoCompraProduto")

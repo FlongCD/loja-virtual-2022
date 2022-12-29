@@ -12,18 +12,20 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 @Entity
+@SequenceGenerator(name = "pessoas_seq" ,initialValue = 1,  sequenceName = "pessoas_seq", allocationSize = 1)
 @Table(name = "pessoa")
 @Data
 public class Pessoa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pessoas_seq")
     private Long id;
 
     @ManyToOne
