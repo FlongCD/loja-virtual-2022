@@ -13,35 +13,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flong.backend.entity.Estado;
-import com.flong.backend.service.EstadoService;
+import com.flong.backend.entity.Pessoa;
+import com.flong.backend.service.PessoaService;
+
+import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/estado")
-public class EstadoController {
+@RequestMapping("/api/pessoa")
+public class PessoaController {
     
     @Autowired
-    private EstadoService estadoService;
+    private PessoaService pessoaService;
 
     @GetMapping("/")
-    public List<Estado> buscarTodos(){
-       return estadoService.buscarTodos();
-    }
+    public List<Pessoa> buscarTodos(){
+        return pessoaService.buscarTodos();
+    } 
 
     @PostMapping("/")
-    public Estado inserir(@RequestBody Estado estado){
-        return estadoService.inserir(estado);
+    public Pessoa inserir(@Valid @RequestBody Pessoa pessoa){
+        return pessoaService.inserir(pessoa);
     }
-    
+
     @PutMapping("/")
-    public Estado alterar (@RequestBody Estado estado){
-        return estadoService.alterar(estado);
+    public Pessoa alterar(@RequestBody Pessoa pessoa){
+        return pessoaService.alterar(pessoa);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> Excluir(@PathVariable("id") Long id){
-        estadoService.excluir(id);
+    public ResponseEntity<Void> excluir(@PathVariable("id") Long id){
+        pessoaService.excluir(id);
         return ResponseEntity.ok().build();
     }
-
 }

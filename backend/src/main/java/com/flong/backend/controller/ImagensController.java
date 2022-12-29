@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flong.backend.entity.Estado;
-import com.flong.backend.service.EstadoService;
+import com.flong.backend.entity.Imagens;
+import com.flong.backend.service.ImagensService;
 
 @RestController
-@RequestMapping("/api/estado")
-public class EstadoController {
+@RequestMapping("/api/imagens")
+public class ImagensController {
     
     @Autowired
-    private EstadoService estadoService;
+    private ImagensService imagensService;
 
     @GetMapping("/")
-    public List<Estado> buscarTodos(){
-       return estadoService.buscarTodos();
+    public List<Imagens> buscarTodos(){
+       return imagensService.buscarTodos();
     }
 
     @PostMapping("/")
-    public Estado inserir(@RequestBody Estado estado){
-        return estadoService.inserir(estado);
+    public Imagens inserir(@RequestBody Imagens imagens){
+        return imagensService.inserir(imagens);
     }
     
     @PutMapping("/")
-    public Estado alterar (@RequestBody Estado estado){
-        return estadoService.alterar(estado);
+    public Imagens alterar (@RequestBody Imagens imagens){
+        return imagensService.alterar(imagens);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> Excluir(@PathVariable("id") Long id){
-        estadoService.excluir(id);
+        imagensService.excluir(id);
         return ResponseEntity.ok().build();
     }
 

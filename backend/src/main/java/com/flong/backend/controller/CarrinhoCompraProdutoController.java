@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flong.backend.entity.Estado;
-import com.flong.backend.service.EstadoService;
+import com.flong.backend.entity.CarrinhoCompraProduto;
+import com.flong.backend.service.CarrinhoCompraProdutoService;
 
 @RestController
-@RequestMapping("/api/estado")
-public class EstadoController {
+@RequestMapping("/api/carrinhocompraproduto")
+public class CarrinhoCompraProdutoController {
     
     @Autowired
-    private EstadoService estadoService;
+    private CarrinhoCompraProdutoService carrinhoCompraProdutoService;
 
     @GetMapping("/")
-    public List<Estado> buscarTodos(){
-       return estadoService.buscarTodos();
+    public List<CarrinhoCompraProduto> buscarTodos(){
+       return carrinhoCompraProdutoService.buscarTodos();
     }
 
     @PostMapping("/")
-    public Estado inserir(@RequestBody Estado estado){
-        return estadoService.inserir(estado);
+    public CarrinhoCompraProduto inserir(@RequestBody CarrinhoCompraProduto carrinhoCompraProduto){
+        return carrinhoCompraProdutoService.inserir(carrinhoCompraProduto);
     }
     
     @PutMapping("/")
-    public Estado alterar (@RequestBody Estado estado){
-        return estadoService.alterar(estado);
+    public CarrinhoCompraProduto alterar (@RequestBody CarrinhoCompraProduto carrinhoCompraProduto){
+        return carrinhoCompraProdutoService.alterar(carrinhoCompraProduto);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> Excluir(@PathVariable("id") Long id){
-        estadoService.excluir(id);
+        carrinhoCompraProdutoService.excluir(id);
         return ResponseEntity.ok().build();
     }
 

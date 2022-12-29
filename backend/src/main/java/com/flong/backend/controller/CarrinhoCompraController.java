@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flong.backend.entity.Estado;
-import com.flong.backend.service.EstadoService;
+import com.flong.backend.entity.CarrinhoCompra;
+import com.flong.backend.service.CarrinhoCompraService;
 
 @RestController
-@RequestMapping("/api/estado")
-public class EstadoController {
+@RequestMapping("/api/carrinhocompra")
+public class CarrinhoCompraController {
     
     @Autowired
-    private EstadoService estadoService;
+    private CarrinhoCompraService carrinhoCompraService;
 
     @GetMapping("/")
-    public List<Estado> buscarTodos(){
-       return estadoService.buscarTodos();
+    public List<CarrinhoCompra> buscarTodos(){
+       return carrinhoCompraService.buscarTodos();
     }
 
     @PostMapping("/")
-    public Estado inserir(@RequestBody Estado estado){
-        return estadoService.inserir(estado);
+    public CarrinhoCompra inserir(@RequestBody CarrinhoCompra carrinhoCompra){
+        return carrinhoCompraService.inserir(carrinhoCompra);
     }
     
     @PutMapping("/")
-    public Estado alterar (@RequestBody Estado estado){
-        return estadoService.alterar(estado);
+    public CarrinhoCompra alterar (@RequestBody CarrinhoCompra carrinhoCompra){
+        return carrinhoCompraService.alterar(carrinhoCompra);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> Excluir(@PathVariable("id") Long id){
-        estadoService.excluir(id);
+        carrinhoCompraService.excluir(id);
         return ResponseEntity.ok().build();
     }
 
