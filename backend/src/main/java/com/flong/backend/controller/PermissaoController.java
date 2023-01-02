@@ -11,38 +11,36 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.flong.backend.entity.ProdutoImagens;
-import com.flong.backend.service.ProdutoImagensService;
+import com.flong.backend.entity.Permissao;
+import com.flong.backend.service.PermissaoService;
 
 @RestController
-@RequestMapping("/api/produtoImagens")
-public class ProdutoImagensController {
+@RequestMapping("/api/permissao")
+public class PermissaoController {
     
     @Autowired
-    private ProdutoImagensService produtoProdutoImagensService;
+    private PermissaoService permissaoService;
 
     @GetMapping("/")
-    public List<ProdutoImagens> buscarTodos(){
-       return produtoProdutoImagensService.buscarTodos();
+    public List<Permissao> buscarTodos(){
+       return permissaoService.buscarTodos();
     }
 
     @PostMapping("/")
-    public ProdutoImagens inserir(@RequestParam("idProduto") Long id, @RequestParam("file") MultipartFile file){
-        return produtoProdutoImagensService.inserir(id, file);
+    public Permissao inserir(@RequestBody Permissao permissao){
+        return permissaoService.inserir(permissao);
     }
     
     @PutMapping("/")
-    public ProdutoImagens alterar (@RequestBody ProdutoImagens produtoProdutoImagens){
-        return produtoProdutoImagensService.alterar(produtoProdutoImagens);
+    public Permissao alterar (@RequestBody Permissao permissao){
+        return permissaoService.alterar(permissao);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> Excluir(@PathVariable("id") Long id){
-        produtoProdutoImagensService.excluir(id);
+        permissaoService.excluir(id);
         return ResponseEntity.ok().build();
     }
 

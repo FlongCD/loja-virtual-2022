@@ -6,8 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.flong.backend.entity.Permissao;
 import com.flong.backend.entity.PermissaoPessoa;
+import com.flong.backend.entity.Pessoa;
 import com.flong.backend.repository.PermissaoPessoaRepository;
+import com.flong.backend.repository.PermissaoRepository;
 
 @Service
 public class PermissaoPessoaService {
@@ -15,23 +18,19 @@ public class PermissaoPessoaService {
     @Autowired
     private PermissaoPessoaRepository permissaoPessoaRepository;
 
-    public List<PermissaoPessoa> buscarTodos(){
-        return permissaoPessoaRepository.findAll();
-    }
+    @Autowired
+    private PermissaoRepository permissaoRepository;
 
-    public PermissaoPessoa inserir(PermissaoPessoa permissaoPessoa){
-        permissaoPessoa.setDataCriacao(new Date());
-        PermissaoPessoa permissaoPessoaNovo = permissaoPessoaRepository.saveAndFlush(permissaoPessoa);
-        return permissaoPessoaNovo;
-    }
+    public void vincularPessoaPermissaoCliente(Pessoa pessoa){
+        
+        List<Permissao> listaPermissao = permissaoRepository.findByNome("cliente");
 
-    public PermissaoPessoa alterar(PermissaoPessoa permissaoPessoa){
-        permissaoPessoa.setDataAtualizacao(new Date());
-        return permissaoPessoaRepository.saveAndFlush(permissaoPessoa);
-    }
-
-    public void excluir(Long id){
-        PermissaoPessoa permissaoPessoa = permissaoPessoaRepository.findById(id).get();
-        permissaoPessoaRepository.delete(permissaoPessoa);
+        if(listaPermissao.size()>0){
+            PermissaoPessoa permissaoPessoa = new PermissaoPessoa();
+            permissaoPessoa.setPessoa(pessoa);
+            permissaoPessoa.setPermissao(listaPermissao.get(0));
+            permissaoPessoa.setDataCriacao(new Date());
+            permissaoPessoaRepository.saveAndFlush(permissaoPessoa);
+        }
     }
 }
