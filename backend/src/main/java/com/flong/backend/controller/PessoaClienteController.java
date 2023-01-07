@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.flong.backend.dto.PessoaClienteRequestDTO;
 import com.flong.backend.entity.Pessoa;
 import com.flong.backend.service.PessoaClienteService;
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/cliente")
