@@ -1,6 +1,9 @@
 package com.flong.backend.service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +27,11 @@ public class PessoaClienteService {
        pessoa.setDataCriacao(new Date());
        Pessoa pessoaNovo = pessoaRepository.saveAndFlush(pessoa);
        permissaoPessoaService.vincularPessoaPermissaoCliente(pessoaNovo);
-       emailService.enviarEmailTexto(pessoaNovo.getEmail(), "Cadastro na Loja Flong", "O registro na loja foi realizado com sucesso. Em breve você receberá a senha de acesso por email");
+       //emailService.enviarEmailTexto(pessoaNovo.getEmail(), "Cadastro na Loja Flong", "O registro na loja foi realizado com sucesso. Em breve você receberá a senha de acesso por email");
+       Map<String, Object> propMap = new HashMap<>();
+       propMap.put("nome", pessoaNovo.getNome());
+       propMap.put("mensagem", "O registro na loja foi realizado com sucesso. Em breve você receberá a senha de acesso por email");
+       emailService.enviarEmailTemplate(pessoaNovo.getEmail(), "Cadastro na loja Flong", propMap);
        return pessoaNovo; 
     }
 

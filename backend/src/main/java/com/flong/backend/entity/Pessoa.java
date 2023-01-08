@@ -3,8 +3,6 @@ package com.flong.backend.entity;
 import java.util.Date;
 import java.util.List;
 
-import com.flong.backend.utils.Cpf;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
